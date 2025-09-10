@@ -33,6 +33,7 @@ export function IntroPage() {
           onClick={() => navigate('/home')}
           variant="white"
           size="custom"
+          type="button"
           className="px-8 py-2 text-lg md:px-10 md:py-3 md:text-xl tracking-[0.1em]"
         >
           ENTER
