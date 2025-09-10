@@ -1,8 +1,12 @@
+import { Routes, Route } from 'react-router-dom'
+import { IntroPage } from '@/pages'
+
 function App() {
   return (
     <div className="min-h-screen bg-background">
-      <h1 className="text-2xl font-bold p-4 text-foreground">DevMovies</h1>
-      <p className="text-muted-foreground px-4">Movie search application</p>
+      <Routes>
+        <Route path="/" element={<IntroPage />} />
+      </Routes>
     </div>
   )
 }

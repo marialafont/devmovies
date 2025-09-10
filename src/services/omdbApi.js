@@ -1,4 +1,4 @@
-import { API_CONFIG } from '@/lib/constants'
+import { API_CONFIG } from '@/config/constants'
 
 const { OMDB_BASE_URL, OMDB_API_KEY } = API_CONFIG
 
