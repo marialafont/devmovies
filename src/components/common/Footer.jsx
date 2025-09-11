@@ -4,8 +4,8 @@ import { TwitterIcon, InstagramIcon, FacebookIcon } from './SocialIcons'
 
 export function Footer() {
   return (
-    <footer className="bg-background border-t border-border pt-6 md:pt-8 lg:pt-10 pb-4 mt-auto">
-      <div className="container mx-auto px-4 md:px-8 lg:px-14">
+    <footer className="bg-background border-t border-border pt-8 lg:pt-10 pb-4 mt-auto">
+      <div className="mx-auto px-4 md:px-8 lg:px-14">
         <div className="flex flex-col items-center space-y-6 md:space-y-7 lg:space-y-8">
           <Logo
             width="140px"
