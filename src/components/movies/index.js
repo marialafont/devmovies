@@ -1,2 +1,5 @@
-export * from './MoviesContainer'
 export * from './SearchBar'
+export * from './MovieCard'
+export * from './MovieGrid'
+export * from './MoviesContainer'
+export * from './MovieModal'
