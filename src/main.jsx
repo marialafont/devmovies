@@ -4,6 +4,7 @@ import { BrowserRouter } from 'react-router-dom'
 import { QueryClientProvider } from '@tanstack/react-query'
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools'
 import { queryClient } from '@/config'
+import { MovieProvider } from '@/context'
 import App from './App.jsx'
 import './index.css'
 
@@ -11,8 +12,10 @@ ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
     <BrowserRouter>
       <QueryClientProvider client={queryClient}>
-        <App />
-        <ReactQueryDevtools initialIsOpen={false} />
+        <MovieProvider>
+          <App />
+          <ReactQueryDevtools initialIsOpen={false} />
+        </MovieProvider>
       </QueryClientProvider>
     </BrowserRouter>
   </React.StrictMode>

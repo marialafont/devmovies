@@ -1,1 +1,1 @@
-export * from './omdbApi'
+export * from './movieService'
