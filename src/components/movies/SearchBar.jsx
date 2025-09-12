@@ -2,6 +2,7 @@ import { Search } from 'lucide-react'
 import { Input } from '@/components/ui/input'
 import { Button } from '@/components/ui/button'
 import { useState, useCallback } from 'react'
+import { motion as Motion } from 'framer-motion'
 import { useMovieContext } from '@/context'
 import { searchValidations } from '@/utils/validations'
 import { useFormValidation } from '@/hooks/useFormValidation'
@@ -16,33 +17,47 @@ export function SearchBar() {
   const { errors, validateField, clearFieldError } =
     useFormValidation(validationRules)
 
-  const handleSubmit = useCallback(e => {
-    e.preventDefault()
+  const handleSubmit = useCallback(
+    e => {
+      e.preventDefault()
 
-    const error = validateField('query', query)
-    if (error) return
+      const error = validateField('query', query)
+      if (error) return
 
-    const clearedQuery = searchValidations.cleanQuery(query)
-    startSearch(clearedQuery)
-    setQuery('')
-    clearFieldError('query')
-  }, [query, validateField, startSearch, clearFieldError])
-
-  const handleKeyPress = useCallback(e => {
-    if (e.key === 'Enter') {
-      handleSubmit(e)
-    }
-  }, [handleSubmit])
-
-  const handleInputChange = useCallback(e => {
-    setQuery(e.target.value)
-    if (errors.query) {
+      const clearedQuery = searchValidations.cleanQuery(query)
+      startSearch(clearedQuery)
+      setQuery('')
       clearFieldError('query')
-    }
-  }, [errors.query, clearFieldError])
+    },
+    [query, validateField, startSearch, clearFieldError]
+  )
+
+  const handleKeyPress = useCallback(
+    e => {
+      if (e.key === 'Enter') {
+        handleSubmit(e)
+      }
+    },
+    [handleSubmit]
+  )
+
+  const handleInputChange = useCallback(
+    e => {
+      setQuery(e.target.value)
+      if (errors.query) {
+        clearFieldError('query')
+      }
+    },
+    [errors.query, clearFieldError]
+  )
 
   return (
-    <div className="w-full max-w-lg mx-auto mb-8">
+    <Motion.div
+      className="w-full max-w-lg mx-auto mb-8"
+      initial={{ opacity: 0, scale: 0.9 }}
+      animate={{ opacity: 1, scale: 1 }}
+      transition={{ duration: 0.8, ease: [0.25, 0.1, 0.25, 1] }}
+    >
       <form onSubmit={handleSubmit} className="relative">
         <Input
           value={query}
@@ -65,6 +80,6 @@ export function SearchBar() {
       {errors.query && (
         <p className="text-red-500 text-xs mt-2 text-center">{errors.query}</p>
       )}
-    </div>
+    </Motion.div>
   )
 }

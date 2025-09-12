@@ -27,6 +27,11 @@
     --radius: 0.5rem;
   }
 
+  #root {
+    overflow-x: hidden;
+    width: 100%;
+  }
+
   body {
     @apply bg-background text-foreground;
     font-family: 'Roboto Condensed', sans-serif;
@@ -37,34 +42,29 @@
     overflow-x: hidden;
   }
 
-  /* Custom scrollbar styles */
+  /* Hide scrollbar for webkit browsers (Chrome, Safari, Edge) */
   ::-webkit-scrollbar {
-    width: 8px;
-    height: 8px;
+    display: none;
+    width: 0px;
+    background: transparent;
   }
 
-  ::-webkit-scrollbar-track {
-    background: hsl(var(--background));
-    border-radius: 4px;
-  }
-
-  ::-webkit-scrollbar-thumb {
-    background: hsl(var(--border));
-    border-radius: 4px;
-    transition: background-color 0.2s ease;
-  }
-
-  ::-webkit-scrollbar-thumb:hover {
-    background: hsl(var(--muted-foreground));
-  }
-
-  ::-webkit-scrollbar-corner {
-    background: hsl(var(--background));
-  }
-
-  /* Firefox scrollbar */
+  /* Hide scrollbar for Firefox */
   html {
-    scrollbar-width: thin;
-    scrollbar-color: hsl(var(--border)) hsl(var(--background));
+    scrollbar-width: none;
+  }
+
+  /* Hide scrollbar for IE and Edge Legacy */
+  body {
+    -ms-overflow-style: none;
+  }
+
+  @keyframes shimmer {
+    0% {
+      background-position: -200% 0;
+    }
+    100% {
+      background-position: 200% 0;
+    }
   }
 }

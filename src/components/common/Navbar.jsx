@@ -4,6 +4,7 @@ import { Logo } from '@/components/common/Logo'
 import userImage from '@/assets/images/user.png'
 import { Link } from 'react-router-dom'
 import { useState } from 'react'
+import { motion as Motion } from 'framer-motion'
 
 export function Navbar() {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
@@ -92,54 +93,71 @@ export function Navbar() {
           </div>
         </div>
 
-        {isMenuOpen && (
-          <div className="lg:hidden fixed top-[60px] md:top-[70px] left-0 w-1/2 md:w-[35%] bg-popover/95 shadow-lg z-40">
-            <nav className="flex flex-col space-y-4 p-6">
-              <Link
-                to="#"
-                className="text-foreground font-semibold hover:text-muted-foreground py-2"
-                onClick={() => setIsMenuOpen(false)}
+        <AnimatePresence>
+          {isMenuOpen && (
+            <Motion.div
+              className="lg:hidden fixed top-[60px] md:top-[70px] left-0 w-1/2 md:w-[35%] bg-popover/95 shadow-lg z-40"
+              initial={{ x: '-100%', opacity: 0 }}
+              animate={{ x: 0, opacity: 1 }}
+              exit={{ x: '-100%', opacity: 0 }}
+              transition={{
+                duration: 0.3,
+                ease: [0.25, 0.1, 0.25, 1],
+              }}
+            >
+              <Motion.nav
+                className="flex flex-col space-y-4 p-6"
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+                transition={{ delay: 0.1, duration: 0.2 }}
               >
-                Home
-              </Link>
-              <Link
-                to="#"
-                className="text-muted-foreground hover:text-foreground py-2"
-                onClick={() => setIsMenuOpen(false)}
-              >
-                Tv Shows
-              </Link>
-              <Link
-                to="#"
-                className="text-muted-foreground hover:text-foreground py-2"
-                onClick={() => setIsMenuOpen(false)}
-              >
-                Movies
-              </Link>
-              <Link
-                to="#"
-                className="text-muted-foreground hover:text-foreground py-2"
-                onClick={() => setIsMenuOpen(false)}
-              >
-                Kids
-              </Link>
-              <Link
-                to="#"
-                className="text-muted-foreground hover:text-foreground py-2"
-                onClick={() => setIsMenuOpen(false)}
-              >
-                New
-              </Link>
-              <Link
-                to="#"
-                className="text-muted-foreground hover:text-foreground py-2"
-                onClick={() => setIsMenuOpen(false)}
-              >
-                Popular
-              </Link>
-            </nav>
-          </div>
-        )}
+                <Link
+                  to="#"
+                  className="text-foreground font-semibold hover:text-muted-foreground py-2"
+                  onClick={() => setIsMenuOpen(false)}
+                >
+                  Home
+                </Link>
+                <Link
+                  to="#"
+                  className="text-muted-foreground hover:text-foreground py-2"
+                  onClick={() => setIsMenuOpen(false)}
+                >
+                  Tv Shows
+                </Link>
+                <Link
+                  to="#"
+                  className="text-muted-foreground hover:text-foreground py-2"
+                  onClick={() => setIsMenuOpen(false)}
+                >
+                  Movies
+                </Link>
+                <Link
+                  to="#"
+                  className="text-muted-foreground hover:text-foreground py-2"
+                  onClick={() => setIsMenuOpen(false)}
+                >
+                  Kids
+                </Link>
+                <Link
+                  to="#"
+                  className="text-muted-foreground hover:text-foreground py-2"
+                  onClick={() => setIsMenuOpen(false)}
+                >
+                  New
+                </Link>
+                <Link
+                  to="#"
+                  className="text-muted-foreground hover:text-foreground py-2"
+                  onClick={() => setIsMenuOpen(false)}
+                >
+                  Popular
+                </Link>
+              </Motion.nav>
+            </Motion.div>
+          )}
+        </AnimatePresence>
       </div>
     </header>
   )
