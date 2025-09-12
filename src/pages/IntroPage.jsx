@@ -1,5 +1,6 @@
 import { useNavigate } from 'react-router-dom'
-import { Button, Logo } from '@/components'
+import { Logo } from '@/components'
+import { Button } from '@/components/ui/button'
 import backgroundImage from '@/assets/images/background.jpg'
 
 export function IntroPage() {

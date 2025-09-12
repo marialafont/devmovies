@@ -1,47 +1,56 @@
 import { useState } from 'react'
 import { MovieModal } from './MovieModal'
-import poster from '@/assets/images/poster.jpg'
+import { useMovieDetails } from '@/hooks/useMovieSearch'
 
-export function MovieCard() {
+export function MovieCard({ movie }) {
   const [isModalOpen, setIsModalOpen] = useState(false)
+  const [selectedMovie, setSelectedMovie] = useState(null)
 
-  const mockMovie = {
-    Title: 'Blade Runner 2049',
-    Year: '2017',
-    Runtime: '164 min',
-    Genre: 'Action, Drama, Mystery',
-    Director: 'Denis Villeneuve',
-    Actors: 'Ryan Gosling, Harrison Ford, Ana de Armas',
-    Plot: "Young Blade Runner K's discovery of a long-buried secret leads him to track down former Blade Runner Rick Deckard, who's been missing for thirty years.",
-    imdbRating: '8.0',
-    Poster: poster,
+  const {
+    data: movieDetails,
+    isLoading: isLoadingDetails,
+    error: detailsError,
+  } = useMovieDetails(selectedMovie)
+
+  const handleCardClick = () => {
+    setSelectedMovie(movie.imdbID)
+    setIsModalOpen(true)
+  }
+
+  const handleCloseModal = () => {
+    setIsModalOpen(false)
+    setSelectedMovie(null)
   }
 
   return (
     <>
-      <div
-        className="group cursor-pointer"
-        onClick={() => setIsModalOpen(true)}
-      >
+      <div className="group cursor-pointer" onClick={handleCardClick}>
         <div className="aspect-[2/3] bg-muted rounded-lg overflow-hidden mb-3">
           <img
-            src={mockMovie.Poster}
-            alt={mockMovie.Title}
-            className="w-full h-full object-cover group-hover:scale-105"
+            src={
+              movie.Poster !== 'N/A' ? movie.Poster : '/placeholder-movie.svg'
+            }
+            alt={movie.Title}
+            className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+            onError={e => {
+              e.target.src = '/placeholder-movie.svg'
+            }}
           />
         </div>
         <div className="space-y-1">
           <h3 className="text-sm font-medium text-foreground line-clamp-2 leading-tight">
-            {mockMovie.Title}
+            {movie.Title}
           </h3>
-          <p className="text-xs text-muted-foreground">{mockMovie.Year}</p>
+          <p className="text-xs text-muted-foreground">{movie.Year}</p>
         </div>
       </div>
 
       <MovieModal
-        movie={mockMovie}
+        movie={movieDetails}
         isOpen={isModalOpen}
-        onClose={() => setIsModalOpen(false)}
+        onClose={handleCloseModal}
+        isLoading={isLoadingDetails}
+        error={detailsError}
       />
     </>
   )

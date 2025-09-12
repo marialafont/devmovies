@@ -9,7 +9,7 @@ export function Navbar() {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
 
   return (
-    <header className="bg-popover sticky top-0 z-50 h-[60px] md:h-[70px] lg:h-[80px] w-full px-2 md:px-6 lg:px-14 flex items-center">
+    <header className="bg-popover fixed top-0 z-50 h-[60px] md:h-[70px] lg:h-[80px] w-full px-2 md:px-6 lg:px-14 flex items-center">
       <div className="w-full mx-auto">
         <div className="flex items-center justify-between lg:justify-start">
           <Button
