@@ -1,6 +1,8 @@
-import { useState } from 'react'
-import { MovieModal } from './MovieModal'
+import { useState, lazy, Suspense } from 'react'
 import { useMovieDetails } from '@/hooks/useMovieSearch'
+import { Loader2 } from 'lucide-react'
+
+const MovieModal = lazy(() => import('./MovieModal'))
 
 export function MovieCard({ movie }) {
   const [isModalOpen, setIsModalOpen] = useState(false)
@@ -45,13 +47,23 @@ export function MovieCard({ movie }) {
         </div>
       </div>
 
-      <MovieModal
-        movie={movieDetails}
-        isOpen={isModalOpen}
-        onClose={handleCloseModal}
-        isLoading={isLoadingDetails}
-        error={detailsError}
-      />
+      {isModalOpen && (
+        <Suspense
+          fallback={
+            <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50">
+              <Loader2 className="h-8 w-8 animate-spin text-white" />
+            </div>
+          }
+        >
+          <MovieModal
+            movie={movieDetails}
+            isOpen={isModalOpen}
+            onClose={handleCloseModal}
+            isLoading={isLoadingDetails}
+            error={detailsError}
+          />
+        </Suspense>
+      )}
     </>
   )
 }

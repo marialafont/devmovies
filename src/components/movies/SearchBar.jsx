@@ -1,7 +1,7 @@
 import { Search } from 'lucide-react'
 import { Input } from '@/components/ui/input'
 import { Button } from '@/components/ui/button'
-import { useState } from 'react'
+import { useState, useCallback } from 'react'
 import { useMovieContext } from '@/context'
 import { searchValidations } from '@/utils/validations'
 import { useFormValidation } from '@/hooks/useFormValidation'
@@ -16,7 +16,7 @@ export function SearchBar() {
   const { errors, validateField, clearFieldError } =
     useFormValidation(validationRules)
 
-  const handleSubmit = e => {
+  const handleSubmit = useCallback(e => {
     e.preventDefault()
 
     const error = validateField('query', query)
@@ -26,20 +26,20 @@ export function SearchBar() {
     startSearch(clearedQuery)
     setQuery('')
     clearFieldError('query')
-  }
+  }, [query, validateField, startSearch, clearFieldError])
 
-  const handleKeyPress = e => {
+  const handleKeyPress = useCallback(e => {
     if (e.key === 'Enter') {
       handleSubmit(e)
     }
-  }
+  }, [handleSubmit])
 
-  const handleInputChange = e => {
+  const handleInputChange = useCallback(e => {
     setQuery(e.target.value)
     if (errors.query) {
       clearFieldError('query')
     }
-  }
+  }, [errors.query, clearFieldError])
 
   return (
     <div className="w-full max-w-lg mx-auto mb-8">

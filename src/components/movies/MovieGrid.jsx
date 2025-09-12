@@ -3,6 +3,8 @@ import { useMovieContext } from '@/context'
 import { useMovieSearch } from '@/hooks/useMovieSearch'
 import { Button } from '@/components/ui/button'
 import { Loader2 } from 'lucide-react'
+import { useMemo } from 'react'
+import { useCallback } from 'react'
 
 export function MovieGrid() {
   const { searchQuery, isSearchActive } = useMovieContext()
@@ -16,6 +18,18 @@ export function MovieGrid() {
     hasNextPage,
     isFetchingNextPage,
   } = useMovieSearch(searchQuery, isSearchActive)
+
+  const movies = useMemo(() => {
+    return (
+      data?.pages?.flatMap(page =>
+        page.Response === 'True' ? page.Search : []
+      ) || []
+    )
+  }, [data?.pages])
+
+  const handleLoadMore = useCallback(() => {
+    fetchNextPage()
+  }, [fetchNextPage])
 
   if (!isSearchActive) {
     return (
@@ -55,11 +69,6 @@ export function MovieGrid() {
     )
   }
 
-  const movies =
-    data?.pages?.flatMap(page =>
-      page.Response === 'True' ? page.Search : []
-    ) || []
-
   if (movies.length === 0) {
     return (
       <div className="flex items-center justify-center min-h-[400px] text-center">
@@ -86,7 +95,7 @@ export function MovieGrid() {
       {hasNextPage && (
         <div className="flex justify-center">
           <Button
-            onClick={() => fetchNextPage()}
+            onClick={handleLoadMore}
             disabled={isFetchingNextPage}
             variant="outline"
             className="px-8"

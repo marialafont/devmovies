@@ -100,3 +100,5 @@ export function MovieModal({ movie, isOpen, onClose, isLoading, error }) {
     </Dialog>
   )
 }
+
+export default MovieModal
