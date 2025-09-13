@@ -4,7 +4,7 @@ import { Logo } from '@/components/common/Logo'
 import userImage from '@/assets/images/user.png'
 import { Link } from 'react-router-dom'
 import { useState } from 'react'
-import { motion as Motion } from 'framer-motion'
+import { motion as Motion, AnimatePresence } from 'framer-motion'
 
 export function Navbar() {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
