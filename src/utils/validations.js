@@ -7,7 +7,7 @@ export const searchValidations = {
     const trimmedQuery = query.trim()
 
     if (trimmedQuery.length < 2) {
-      return 'Plase enter at least two characters'
+      return 'Please enter at least two characters'
     }
 
     if (trimmedQuery.length > 100) {
