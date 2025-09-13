@@ -17,6 +17,22 @@ DevMovies is a Single Page Application (SPA) that allows users to search and exp
 - 🔄 State management with React Query
 - 🎯 Global state management with Context API
 
+## 📸 Screenshots
+
+### Intro Page
+![Intro Page](docs/screenshots/intro-page.jpg)
+
+### Home Page with no results
+![Home Page](docs/screenshots/home-page.jpg)
+
+### Home page with results
+![Search Results](docs/screenshots/search-results.jpg)
+
+### Movie Modal
+![Movie Modal](docs/screenshots/movie-modal.jpg)
+
+### Responsive
+![Responsive Design](docs/screenshots/responsive-design.jpg)
 
 ## 🚀 Getting Started
 
