@@ -2,10 +2,13 @@ import { useNavigate } from 'react-router-dom'
 import { motion as Motion } from 'framer-motion'
 import { Logo } from '@/components'
 import { Button } from '@/components/ui/button'
-import backgroundImage from '@/assets/images/background.jpg'
+import backgroundMobile from '@/assets/images/background-mobile.jpg'
+import backgroundDesktop from '@/assets/images/background-desktop.jpg'
 
 export function IntroPage() {
   const navigate = useNavigate()
+  const isMobile = window.innerWidth < 768
+  const backgroundImage = isMobile ? backgroundMobile : backgroundDesktop
 
   return (
     <div className="min-h-screen relative flex items-center justify-center overflow-hidden">
